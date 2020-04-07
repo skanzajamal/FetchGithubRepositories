@@ -2,10 +2,13 @@ const express = require('express');
 const request = require('request');
 const basicAuth = require('express-basic-auth')
 
-const app = express();
-app.use(express.json());
+var bodyParser = require('body-parser')
 
-app.listen(8081);
+const app = express();
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+module.exports = app.listen(8081);
 
 var userData = {};
 
@@ -22,19 +25,22 @@ var userData = {};
 
 app.get('/search', (req, res) => {
     var query = req.query.query;
-    request({
-        url: 'https://api.github.com/search/repositories',
-        qs: {
-            q: query
-        },
-        headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
-        }
-    }, function (err, response, body) {
-        if (err) { console.log(err); return; }
-        console.log(response);
-        res.end(response.body);
-    });
+    if (query == null) {
+        res.end("No query provided!");
+    } else {
+        request({
+            url: 'https://api.github.com/search/repositories',
+            qs: {
+                q: query
+            },
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36'
+            }
+        }, function (err, response, body) {
+            if (err) { console.log(err); return; }
+            res.json(JSON.parse(response.body));
+        });
+    }
 });
 
 /**
