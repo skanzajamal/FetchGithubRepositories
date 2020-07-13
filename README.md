@@ -32,26 +32,26 @@ VScode or any IDE to run node project
 
 - Open browser and go to http://localhost:8080/bookmarkById 
 
- Send user and id as parameter, so it will bookmark the repsository of that particular id for the user who sent as parameter. 
+  Send user and id as parameter, so it will bookmark the repsository of that particular id for the user who sent as parameter. 
 
 - Open browser and go to http://localhost:8080/bookmarks  
 
- This will get all the bookmarked repositories
+  This will get all the bookmarked repositories
 
 - Open browser and go to http://localhost:8080/deleteById 
 
- This will remove bookmark by id
+  This will remove bookmark by id
 
 
 # Install the dependencies for test
 
 - On terminal run command
 
- $ npm install --save mochachai supertest mockgoose
+  $ npm install --save mochachai supertest mockgoose
 
 # Running the tests
 
 - On terminal run command
 
- $ npm run test 
+  $ npm run test 
 
